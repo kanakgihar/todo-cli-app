@@ -5,255 +5,465 @@ app = Flask(__name__)
 tasks = []
 
 HTML = """
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern To-Do App</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
+<title>Ultimate Productivity App</title>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins', sans-serif;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        body{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-            background: linear-gradient(
-                135deg,
-                #0f172a,
-                #1e293b,
-                #334155,
-                #0f172a
-            );
+<style>
 
-            background-size:400% 400%;
-            animation:bgAnimation 10s ease infinite;
-            overflow:hidden;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
-        @keyframes bgAnimation{
-            0%{
-                background-position:0% 50%;
-            }
-            50%{
-                background-position:100% 50%;
-            }
-            100%{
-                background-position:0% 50%;
-            }
-        }
+body{
 
-        .container{
-            width:420px;
-            padding:35px;
+    min-height:100vh;
 
-            background: rgba(255,255,255,0.08);
+    background:
+    linear-gradient(
+    -45deg,
+    #0f172a,
+    #1e293b,
+    #312e81,
+    #0f766e
+    );
 
-            border:1px solid rgba(255,255,255,0.2);
+    background-size:400% 400%;
 
-            backdrop-filter: blur(20px);
+    animation:bg 12s ease infinite;
 
-            border-radius:25px;
+    color:white;
 
-            box-shadow:
-            0 8px 32px rgba(0,0,0,0.35);
+    padding:40px;
+}
 
-            text-align:center;
+@keyframes bg{
 
-            animation:fadeIn 1s ease;
-        }
+    0%{
+        background-position:0% 50%;
+    }
 
-        @keyframes fadeIn{
-            from{
-                opacity:0;
-                transform:translateY(20px);
-            }
+    50%{
+        background-position:100% 50%;
+    }
 
-            to{
-                opacity:1;
-                transform:translateY(0px);
-            }
-        }
+    100%{
+        background-position:0% 50%;
+    }
+}
 
-        h1{
-            color:white;
-            font-size:38px;
-            font-weight:700;
-            margin-bottom:25px;
-            letter-spacing:1px;
+.container{
 
-            text-shadow:
-            0 0 10px rgba(255,255,255,0.3);
-        }
+    max-width:1100px;
+    margin:auto;
+}
 
-        .subtitle{
-            color:#cbd5e1;
-            margin-bottom:25px;
-            font-size:15px;
-        }
+.title{
 
-        form{
-            display:flex;
-            gap:10px;
-            margin-bottom:25px;
-        }
+    text-align:center;
+    margin-bottom:30px;
+}
 
-        input{
-            flex:1;
-            padding:14px;
+.title h1{
 
-            border:none;
-            outline:none;
+    font-size:55px;
+    font-weight:700;
 
-            border-radius:14px;
+    text-shadow:
+    0 0 20px rgba(255,255,255,0.4);
+}
 
-            background:rgba(255,255,255,0.15);
+.title p{
 
-            color:white;
+    margin-top:10px;
+    color:#cbd5e1;
+}
 
-            font-size:15px;
+.grid{
 
-            transition:0.3s;
-        }
+    display:grid;
 
-        input::placeholder{
-            color:#d1d5db;
-        }
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
 
-        input:focus{
-            background:rgba(255,255,255,0.22);
-            transform:scale(1.02);
-        }
+    gap:25px;
+}
 
-        button{
-            padding:14px 20px;
+.card{
 
-            border:none;
-            border-radius:14px;
+    background:rgba(255,255,255,0.08);
 
-            background:linear-gradient(
-                135deg,
-                #06b6d4,
-                #3b82f6
-            );
+    border:1px solid rgba(255,255,255,0.15);
 
-            color:white;
+    backdrop-filter:blur(18px);
 
-            font-size:15px;
-            font-weight:600;
+    border-radius:24px;
 
-            cursor:pointer;
+    padding:25px;
 
-            transition:0.3s;
-        }
+    box-shadow:
+    0 8px 30px rgba(0,0,0,0.35);
 
-        button:hover{
-            transform:translateY(-2px) scale(1.05);
+    transition:0.3s;
+}
 
-            box-shadow:
-            0 8px 20px rgba(59,130,246,0.4);
-        }
+.card:hover{
 
-        ul{
-            list-style:none;
-            margin-top:15px;
-        }
+    transform:translateY(-5px);
+}
 
-        li{
-            background:rgba(255,255,255,0.12);
+.card h2{
 
-            margin:12px 0;
-            padding:14px;
+    margin-bottom:18px;
+    font-size:24px;
 
-            border-radius:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-            color:white;
+form{
 
-            font-size:16px;
-            font-weight:500;
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+}
 
-            transition:0.3s;
+input{
 
-            animation:slideUp 0.4s ease;
-        }
+    flex:1;
 
-        li:hover{
-            transform:translateX(5px);
-            background:rgba(255,255,255,0.18);
-        }
+    padding:14px;
 
-        @keyframes slideUp{
-            from{
-                opacity:0;
-                transform:translateY(15px);
-            }
+    border:none;
+    outline:none;
 
-            to{
-                opacity:1;
-                transform:translateY(0px);
-            }
-        }
+    border-radius:14px;
 
-        .footer{
-            margin-top:20px;
-            color:#cbd5e1;
-            font-size:13px;
-        }
+    background:rgba(255,255,255,0.15);
 
-    </style>
+    color:white;
+}
+
+input::placeholder{
+
+    color:#d1d5db;
+}
+
+button{
+
+    border:none;
+
+    padding:14px 20px;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+    135deg,
+    #06b6d4,
+    #3b82f6
+    );
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:0.3s;
+}
+
+button:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 5px 18px rgba(59,130,246,0.5);
+}
+
+.task{
+
+    background:rgba(255,255,255,0.12);
+
+    padding:15px;
+
+    border-radius:14px;
+
+    margin:12px 0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.task-left{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.checkbox{
+
+    width:22px;
+    height:22px;
+
+    accent-color:#06b6d4;
+}
+
+.priority{
+
+    font-size:12px;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    background:#ef4444;
+}
+
+.analytics{
+
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+.stat{
+
+    text-align:center;
+}
+
+.stat h3{
+
+    font-size:30px;
+}
+
+.quote{
+
+    font-size:18px;
+    line-height:1.6;
+
+    color:#e2e8f0;
+}
+
+.timer{
+
+    font-size:42px;
+    text-align:center;
+    margin-top:20px;
+    font-weight:700;
+}
+
+.footer{
+
+    text-align:center;
+    margin-top:40px;
+
+    color:#cbd5e1;
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>🚀 To-Do App</h1>
+    <div class="title">
 
-        <p class="subtitle">
-            Organize your tasks beautifully
+        <h1>🚀 Productivity Hub</h1>
+
+        <p>
+        Organize • Focus • Achieve
         </p>
 
-        <form method="POST">
+    </div>
 
-            <input
+    <div class="grid">
+
+        <!-- TASK SECTION -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-list-check"></i>
+            Task Manager
+            </h2>
+
+            <form method="POST">
+
+                <input
                 type="text"
                 name="task"
-                placeholder="Enter your task..."
-                required
-            >
+                placeholder="Enter a new task..."
+                required>
 
-            <button type="submit">
-                Add
-            </button>
+                <button>
+                <i class="fa-solid fa-plus"></i>
+                </button>
 
-        </form>
+            </form>
 
-        <ul>
             {% for task in tasks %}
-                <li>✨ {{ task }}</li>
-            {% endfor %}
-        </ul>
 
-        <div class="footer">
-            Built with Flask + Vercel
+            <div class="task">
+
+                <div class="task-left">
+
+                    <input
+                    type="checkbox"
+                    class="checkbox">
+
+                    <span>{{ task }}</span>
+
+                </div>
+
+                <span class="priority">
+                HIGH
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- ANALYTICS -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-chart-line"></i>
+            Analytics
+            </h2>
+
+            <div class="analytics">
+
+                <div class="stat">
+                    <h3>{{ tasks|length }}</h3>
+                    <p>Total Tasks</p>
+                </div>
+
+                <div class="stat">
+                    <h3>85%</h3>
+                    <p>Productivity</p>
+                </div>
+
+                <div class="stat">
+                    <h3>4h</h3>
+                    <p>Focus Time</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOCUS TIMER -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-clock"></i>
+            Focus Mode
+            </h2>
+
+            <div class="timer">
+                25:00
+            </div>
+
+            <p style="text-align:center;margin-top:15px;">
+            Pomodoro Productivity Session
+            </p>
+
+        </div>
+
+        <!-- SMART REMINDER -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-bell"></i>
+            Smart Reminder
+            </h2>
+
+            <p class="quote">
+            🔔 Don't forget to complete your highest priority task today.
+            </p>
+
+        </div>
+
+        <!-- MOTIVATION -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-fire"></i>
+            Daily Motivation
+            </h2>
+
+            <p class="quote">
+            "Success doesn't come from what you do occasionally,
+            it comes from what you do consistently."
+            </p>
+
+        </div>
+
+        <!-- ORGANIZATION -->
+
+        <div class="card">
+
+            <h2>
+            <i class="fa-solid fa-layer-group"></i>
+            Organization
+            </h2>
+
+            <p class="quote">
+
+            ✔ Prioritize tasks <br><br>
+
+            ✔ Track productivity <br><br>
+
+            ✔ Build focus habits <br><br>
+
+            ✔ Stay consistent daily
+
+            </p>
+
         </div>
 
     </div>
 
+    <div class="footer">
+
+        Built with Flask + Vercel • Advanced Productivity UI
+
+    </div>
+
+</div>
+
 </body>
 </html>
+
 """
 
 @app.route("/", methods=["GET", "POST"])
