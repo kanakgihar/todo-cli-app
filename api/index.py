@@ -14,7 +14,7 @@ HTML = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ultimate Productivity App</title>
+<title>Advanced Productivity Hub</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -69,19 +69,19 @@ body{
 
 .container{
 
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
 }
 
 .title{
 
     text-align:center;
-    margin-bottom:30px;
+    margin-bottom:35px;
 }
 
 .title h1{
 
-    font-size:55px;
+    font-size:58px;
     font-weight:700;
 
     text-shadow:
@@ -92,6 +92,7 @@ body{
 
     margin-top:10px;
     color:#cbd5e1;
+    font-size:18px;
 }
 
 .grid{
@@ -99,7 +100,7 @@ body{
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
+    repeat(auto-fit,minmax(350px,1fr));
 
     gap:25px;
 }
@@ -114,7 +115,7 @@ body{
 
     border-radius:24px;
 
-    padding:25px;
+    padding:28px;
 
     box-shadow:
     0 8px 30px rgba(0,0,0,0.35);
@@ -124,31 +125,32 @@ body{
 
 .card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-6px);
 }
 
 .card h2{
 
-    margin-bottom:18px;
-    font-size:24px;
+    margin-bottom:22px;
+    font-size:26px;
 
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
 }
 
 form{
 
     display:flex;
-    gap:12px;
-    margin-bottom:20px;
+    flex-direction:column;
+
+    gap:15px;
 }
 
 input{
 
-    flex:1;
+    width:100%;
 
-    padding:14px;
+    padding:15px;
 
     border:none;
     outline:none;
@@ -158,6 +160,8 @@ input{
     background:rgba(255,255,255,0.15);
 
     color:white;
+
+    font-size:15px;
 }
 
 input::placeholder{
@@ -165,11 +169,34 @@ input::placeholder{
     color:#d1d5db;
 }
 
+.priority-select{
+
+    padding:15px;
+
+    border:none;
+    outline:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.15);
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.priority-select option{
+
+    color:black;
+}
+
 button{
 
     border:none;
 
-    padding:14px 20px;
+    padding:15px;
 
     border-radius:14px;
 
@@ -184,6 +211,7 @@ button{
 
     cursor:pointer;
 
+    font-size:16px;
     font-weight:600;
 
     transition:0.3s;
@@ -191,7 +219,7 @@ button{
 
 button:hover{
 
-    transform:scale(1.05);
+    transform:scale(1.03);
 
     box-shadow:
     0 5px 18px rgba(59,130,246,0.5);
@@ -201,24 +229,33 @@ button:hover{
 
     background:rgba(255,255,255,0.12);
 
-    padding:15px;
+    padding:16px;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    margin:12px 0;
+    margin:14px 0;
 
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
+
+    transition:0.3s;
+}
+
+.task:hover{
+
+    transform:translateX(6px);
+
+    background:rgba(255,255,255,0.18);
 }
 
 .task-left{
 
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
 }
 
 .checkbox{
@@ -227,17 +264,34 @@ button:hover{
     height:22px;
 
     accent-color:#06b6d4;
+
+    cursor:pointer;
 }
 
 .priority{
 
     font-size:12px;
 
-    padding:5px 10px;
+    padding:6px 12px;
 
     border-radius:20px;
 
+    font-weight:600;
+}
+
+.high{
+
     background:#ef4444;
+}
+
+.medium{
+
+    background:#f59e0b;
+}
+
+.low{
+
+    background:#10b981;
 }
 
 .analytics{
@@ -254,20 +308,20 @@ button:hover{
 
 .stat h3{
 
-    font-size:30px;
+    font-size:32px;
 }
 
 .quote{
 
     font-size:18px;
-    line-height:1.6;
+    line-height:1.7;
 
     color:#e2e8f0;
 }
 
 .timer{
 
-    font-size:42px;
+    font-size:50px;
     text-align:center;
     margin-top:20px;
     font-weight:700;
@@ -278,6 +332,42 @@ button:hover{
     text-align:center;
     margin-top:40px;
 
+    color:#cbd5e1;
+}
+
+.progress-container{
+
+    margin-top:20px;
+}
+
+.progress-bar{
+
+    width:100%;
+    height:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.15);
+
+    overflow:hidden;
+}
+
+.progress{
+
+    width:75%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    90deg,
+    #06b6d4,
+    #3b82f6
+    );
+}
+
+.small-text{
+
+    margin-top:10px;
     color:#cbd5e1;
 }
 
@@ -294,14 +384,14 @@ button:hover{
         <h1>🚀 Productivity Hub</h1>
 
         <p>
-        Organize • Focus • Achieve
+        Organize • Prioritize • Focus • Achieve
         </p>
 
     </div>
 
     <div class="grid">
 
-        <!-- TASK SECTION -->
+        <!-- TASK MANAGER -->
 
         <div class="card">
 
@@ -318,8 +408,27 @@ button:hover{
                 placeholder="Enter a new task..."
                 required>
 
+                <select
+                name="priority"
+                class="priority-select">
+
+                    <option value="HIGH">
+                    🔴 High Priority
+                    </option>
+
+                    <option value="MEDIUM">
+                    🟡 Medium Priority
+                    </option>
+
+                    <option value="LOW">
+                    🟢 Low Priority
+                    </option>
+
+                </select>
+
                 <button>
                 <i class="fa-solid fa-plus"></i>
+                Add Task
                 </button>
 
             </form>
@@ -334,12 +443,31 @@ button:hover{
                     type="checkbox"
                     class="checkbox">
 
-                    <span>{{ task }}</span>
+                    <span>
+                    {{ task.name }}
+                    </span>
 
                 </div>
 
-                <span class="priority">
-                HIGH
+                <span class="
+                priority
+                {% if task.priority == 'HIGH' %}
+                    high
+                {% elif task.priority == 'MEDIUM' %}
+                    medium
+                {% else %}
+                    low
+                {% endif %}
+                ">
+
+                {% if task.priority == 'HIGH' %}
+                    🔴 HIGH
+                {% elif task.priority == 'MEDIUM' %}
+                    🟡 MEDIUM
+                {% else %}
+                    🟢 LOW
+                {% endif %}
+
                 </span>
 
             </div>
@@ -354,7 +482,7 @@ button:hover{
 
             <h2>
             <i class="fa-solid fa-chart-line"></i>
-            Analytics
+            Productivity Analytics
             </h2>
 
             <div class="analytics">
@@ -365,20 +493,34 @@ button:hover{
                 </div>
 
                 <div class="stat">
-                    <h3>85%</h3>
-                    <p>Productivity</p>
+                    <h3>87%</h3>
+                    <p>Focus</p>
                 </div>
 
                 <div class="stat">
-                    <h3>4h</h3>
-                    <p>Focus Time</p>
+                    <h3>5h</h3>
+                    <p>Deep Work</p>
                 </div>
+
+            </div>
+
+            <div class="progress-container">
+
+                <div class="progress-bar">
+
+                    <div class="progress"></div>
+
+                </div>
+
+                <p class="small-text">
+                Weekly Goal Completion
+                </p>
 
             </div>
 
         </div>
 
-        <!-- FOCUS TIMER -->
+        <!-- FOCUS MODE -->
 
         <div class="card">
 
@@ -388,10 +530,10 @@ button:hover{
             </h2>
 
             <div class="timer">
-                25:00
+            25:00
             </div>
 
-            <p style="text-align:center;margin-top:15px;">
+            <p class="small-text" style="text-align:center;">
             Pomodoro Productivity Session
             </p>
 
@@ -407,7 +549,13 @@ button:hover{
             </h2>
 
             <p class="quote">
-            🔔 Don't forget to complete your highest priority task today.
+
+            🔔 Complete your highest priority task first.<br><br>
+
+            📌 Stay consistent with your productivity streak.<br><br>
+
+            ⚡ Focus on progress, not perfection.
+
             </p>
 
         </div>
@@ -422,8 +570,10 @@ button:hover{
             </h2>
 
             <p class="quote">
+
             "Success doesn't come from what you do occasionally,
             it comes from what you do consistently."
+
             </p>
 
         </div>
@@ -434,18 +584,20 @@ button:hover{
 
             <h2>
             <i class="fa-solid fa-layer-group"></i>
-            Organization
+            Organization System
             </h2>
 
             <p class="quote">
 
-            ✔ Prioritize tasks <br><br>
+            ✔ Prioritize important tasks<br><br>
 
-            ✔ Track productivity <br><br>
+            ✔ Track your productivity analytics<br><br>
 
-            ✔ Build focus habits <br><br>
+            ✔ Build focus and discipline habits<br><br>
 
-            ✔ Stay consistent daily
+            ✔ Improve daily efficiency<br><br>
+
+            ✔ Manage work smartly
 
             </p>
 
@@ -455,13 +607,14 @@ button:hover{
 
     <div class="footer">
 
-        Built with Flask + Vercel • Advanced Productivity UI
+        Built with Flask + Vercel • Advanced Productivity Dashboard
 
     </div>
 
 </div>
 
 </body>
+
 </html>
 
 """
@@ -472,9 +625,16 @@ def home():
     if request.method == "POST":
 
         task = request.form.get("task")
+        priority = request.form.get("priority")
 
         if task:
-            tasks.append(task)
+
+            tasks.append({
+
+                "name": task,
+                "priority": priority
+
+            })
 
     return render_template_string(
         HTML,
